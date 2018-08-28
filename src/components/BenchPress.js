@@ -34,7 +34,7 @@ class BenchPress extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className='row'>
                 <h2>Bench Press</h2>
                 <input type="number" onChange={this.getBPress} />
                 <Calc

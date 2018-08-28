@@ -34,7 +34,7 @@ class Squat extends React.Component {
     render() {
 
         return (
-            <div>
+            <div className='row'>
                 <h2>Squat</h2>
                 <input type="number" onChange={this.getSquat} />
                 <Calc 

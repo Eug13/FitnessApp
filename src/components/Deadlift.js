@@ -34,7 +34,7 @@ class Deadlift extends React.Component {
     render() {
 
         return (
-            <div>
+            <div className='row'>
                 <h2>DeadLift</h2>
                 <input type="number" onChange={this.getDeadlift} />
                 <Calc 

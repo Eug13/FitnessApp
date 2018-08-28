@@ -156,20 +156,20 @@ class Calc extends React.Component {
 
 
     getBenchPress() {
-        if(this.state.bench.length != 0){ localStorage.setItem('dataBench', JSON.stringify(this.state.bench)); }
+        if(this.state.bench.length !== 0){ localStorage.setItem('dataBench', JSON.stringify(this.state.bench)); }
         let bench = this.state.bench;
       
 
         if (bench) {
             return bench.map((item, index) => {
-                return <tr key={index} id='bench'>
-                    <td>{item.count} week:</td>
-                    <td>{item.count >= 5 ? item.goal : item.weight} :</td>
-                    <td>{item.times} :</td>
-                    <td>{item.rutine} :</td>
-                    <td>{item.six}</td>
-                    <td>{item.final}</td>
-                </tr>
+                return <div key={index} id='bencht' className='row' >
+                <span className='span'>{item.count}week</span>
+                <span className='span'>{item.count >= 5 ? item.goal : item.weight}</span>
+                <span className='span'>{item.times}</span>
+                <span className='span'>{item.rutine}</span>
+                <span className='span'>{item.six}</span>
+                <span className='span'>{item.final}</span>
+            </div>
             })
         }
         return []
@@ -177,18 +177,18 @@ class Calc extends React.Component {
 
     getDeadlift(){
        
-        if(this.state.dead.length != 0){ localStorage.setItem('dataDead', JSON.stringify(this.state.dead)); }
+        if(this.state.dead.length !== 0){ localStorage.setItem('dataDead', JSON.stringify(this.state.dead)); }
         let dead = this.state.dead;
         if (dead) {
             return dead.map((item, index) => {
-                return <tr key={index} id='dead'>
-                    <td>{item.count} week:</td>
-                    <td>{item.count >= 5 ? item.goal : item.weight} :</td>
-                    <td>{item.times} :</td>
-                    <td>{item.rutine} :</td>
-                    <td>{item.six}</td>
-                    <td>{item.final}</td>
-                </tr>
+                return <div key={index} id='dead' className='row' >
+                <span className='span'>{item.count}week</span>
+                <span className='span'>{item.count >= 5 ? item.goal : item.weight}</span>
+                <span className='span'>{item.times}</span>
+                <span className='span'>{item.rutine}</span>
+                <span className='span'>{item.six}</span>
+                <span className='span'>{item.final}</span>
+            </div>
             })
         }
 
@@ -196,19 +196,28 @@ class Calc extends React.Component {
     }
 
     getSquat(){
-        if(this.state.squat.length != 0){ localStorage.setItem('dataSquat', JSON.stringify(this.state.squat)); }
+        if(this.state.squat.length !== 0){ localStorage.setItem('dataSquat', JSON.stringify(this.state.squat)); }
         let squat = this.state.squat;
 
         if (squat) {
             return squat.map((item, index) => {
-                return <tr key={index} id='squat'>
-                    <td>{item.count} week:</td>
-                    <td>{item.count >= 5 ? item.goal : item.weight} :</td>
-                    <td>{item.times} :</td>
-                    <td>{item.rutine} :</td>
-                    <td>{item.six}</td>
-                    <td>{item.final}</td>
-                </tr>
+                return <div key={index} id='squat' className='row' >
+                    <span className='span'>{item.count}week</span>
+                    <span className='span'>{item.count >= 5 ? item.goal : item.weight}</span>
+                    
+                 {/* {  for (var i=0; i < item.times; i++) 
+                          React.createElement('div', { class: 'times' }, 'Chocolate')(i)
+                      
+                    } */}
+                   
+      
+                      { React.createElement('div', { className: 'times' }, 'Chocolate') }
+      
+                    <span className='span'>{item.times}</span>
+                    <span className='span'>{item.rutine}</span>
+                    <span className='span'>{item.six}</span>
+                    <span className='span'>{item.final}</span>
+                </div>
             })
         }
         return []
@@ -221,34 +230,22 @@ class Calc extends React.Component {
         const SQUAT = this.getSquat();
         if(this.props.bench){
             return (
-                <div>
-                    <table>
-                        <tbody>
+                <div className='row'>
                             { BENCH } 
-                        </tbody>
-                    </table>
                 </div>
             );
         }
         if(this.props.dead){
             return (
-                <div>
-                    <table>
-                        <tbody>
+                <div className='row'>
                             { DEADLIFT } 
-                        </tbody>
-                    </table>
                 </div>
             );
         }
         if(this.props.squat){
             return (
-                <div>
-                    <table>
-                        <tbody>
+                <div className='row'>
                             { SQUAT } 
-                        </tbody>
-                    </table>
                 </div>
             );
         }
