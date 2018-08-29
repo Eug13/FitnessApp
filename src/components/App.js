@@ -3,7 +3,7 @@ import BenchPress from './BenchPress';
 import Deadlift from './Deadlift';
 import Squat from './Squat';
 import Start from './Start';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom';
 
 
 class App extends React.Component{
@@ -11,18 +11,18 @@ class App extends React.Component{
         return(
         <Router>
         <div>
-           <Link to="/">
+           <NavLink to="/" >
              Home
-            </Link>
-            <Link to="/BenchPress">
+            </NavLink>
+            <NavLink to="/BenchPress" activeClassName="selected">
             BenchPress
-            </Link>
-            <Link to="/Deadlift">
+            </NavLink>
+            <NavLink to="/Deadlift" activeClassName="selected">
             Deadlift
-            </Link>
-            <Link to="/Squat">
+            </NavLink>
+            <NavLink to="/Squat" activeClassName="selected">
             Squat
-            </Link>
+            </NavLink>
 
             <Route exact path="/" component={Start}/>
             <Route path="/BenchPress" component={BenchPress}/>

@@ -1,4 +1,5 @@
 import React from 'react';
+import View from './View'
 
 class Calc extends React.Component {
     constructor(props) {
@@ -13,24 +14,24 @@ class Calc extends React.Component {
         }
     }
 
-    componentDidMount(){
-        if(localStorage.getItem('dataBench')){
-                let bench = JSON.parse(localStorage.getItem('dataBench'));
-                this.setState({
-                   bench:bench
-                })
-        }
-
-        if(localStorage.getItem('dataDead')){
-            let dead = JSON.parse(localStorage.getItem('dataDead'));
+    componentDidMount() {
+        if (localStorage.getItem('dataBench')) {
+            let bench = JSON.parse(localStorage.getItem('dataBench'));
             this.setState({
-               dead:dead
+                bench: bench
             })
         }
-        if(localStorage.getItem('dataSquat')){
+
+        if (localStorage.getItem('dataDead')) {
+            let dead = JSON.parse(localStorage.getItem('dataDead'));
+            this.setState({
+                dead: dead
+            })
+        }
+        if (localStorage.getItem('dataSquat')) {
             let squat = JSON.parse(localStorage.getItem('dataSquat'));
             this.setState({
-               squat:squat
+                squat: squat
             })
         }
     }
@@ -41,18 +42,18 @@ class Calc extends React.Component {
         }
         if (nextProps.isCleanBench === true) {
             this.setState({
-                bench:[]
-             })
+                bench: []
+            })
         }
         if (nextProps.isCleanDead === true) {
             this.setState({
-                dead:[]
-             })
+                dead: []
+            })
         }
         if (nextProps.isCleanSquat === true) {
             this.setState({
-                squat:[]
-             })
+                squat: []
+            })
         }
     }
 
@@ -151,43 +152,57 @@ class Calc extends React.Component {
             count++
             step += 5;
         }
-       console.log('isReady!!!!!!!!')
+        console.log('isReady!!!!!!!!')
     }
 
 
     getBenchPress() {
-        if(this.state.bench.length !== 0){ localStorage.setItem('dataBench', JSON.stringify(this.state.bench)); }
+        if (this.state.bench.length !== 0) { localStorage.setItem('dataBench', JSON.stringify(this.state.bench)); }
         let bench = this.state.bench;
-      
+        let hard = 'hard';
+        let recovery = 'recovery';
 
         if (bench) {
-            return bench.map((item, index) => {
-                return <div key={index} id='bencht' className='row' >
-                <span className='span'>{item.count}week</span>
-                <span className='span'>{item.count >= 5 ? item.goal : item.weight}</span>
-                <span className='span'>{item.times}</span>
-                <span className='span'>{item.rutine}</span>
-                <span className='span'>{item.six}</span>
-                <span className='span'>{item.final}</span>
+            return bench.map((item , index) => {
+                return <div key={index} id='bench' className='row' >
+                <div className='topCalc'>
+                    <span className='span'>{item.count} WEEK OF 9</span>
+                    <span className='span'>WEIGHT OF THE WEEK :{item.count >= 5 ? item.goal : item.weight} KG</span>
+                    <span className='span'>GOAL :{item.final}</span>
+                </div>
+                <div>
+                  <h3>Hard Training :</h3> <span className='weight'> WEIGHT {item.count >= 5 ? item.goal : item.weight} KG</span>
+                    <View view={item.times} times={item.rutine} hard={hard} key={index}/>
+                </div>
+                <div>
+                  <h3>Recovery Training :  </h3> <span className='weight'>WEIGHT {item.first} KG</span> 
+                  <View view={item.six} times={item.rec} recovery={recovery}/>
+                </div>
             </div>
             })
         }
         return []
     }
 
-    getDeadlift(){
-       
-        if(this.state.dead.length !== 0){ localStorage.setItem('dataDead', JSON.stringify(this.state.dead)); }
+    getDeadlift() {
+
+        if (this.state.dead.length !== 0) { localStorage.setItem('dataDead', JSON.stringify(this.state.dead)); }
         let dead = this.state.dead;
         if (dead) {
             return dead.map((item, index) => {
                 return <div key={index} id='dead' className='row' >
-                <span className='span'>{item.count}week</span>
-                <span className='span'>{item.count >= 5 ? item.goal : item.weight}</span>
-                <span className='span'>{item.times}</span>
-                <span className='span'>{item.rutine}</span>
-                <span className='span'>{item.six}</span>
-                <span className='span'>{item.final}</span>
+                <div className='topCalc'>
+                    <span className='span'>{item.count} WEEK OF 9</span>
+                    <span className='span'>WEIGHT OF THE WEEK :{item.count >= 5 ? item.goal : item.weight} KG</span>
+                    <span className='span'>GOAL :{item.final}</span>
+                </div>
+                <div>
+                  <h3>Hard Training :</h3> <span className='weight'> WEIGHT {item.count >= 5 ? item.goal : item.weight} KG</span>
+                    <View view={item.times} times={item.rutine} />
+                </div>
+                <div>
+                  <h3>Recovery Training :  </h3> <span className='weight'>WEIGHT {item.first} KG</span> <View view={item.six} times={item.rec} />
+                </div>
             </div>
             })
         }
@@ -195,28 +210,26 @@ class Calc extends React.Component {
         return []
     }
 
-    getSquat(){
-        if(this.state.squat.length !== 0){ localStorage.setItem('dataSquat', JSON.stringify(this.state.squat)); }
+    getSquat() {
+        if (this.state.squat.length !== 0) { localStorage.setItem('dataSquat', JSON.stringify(this.state.squat)); }
         let squat = this.state.squat;
+        
 
         if (squat) {
             return squat.map((item, index) => {
                 return <div key={index} id='squat' className='row' >
-                    <span className='span'>{item.count}week</span>
-                    <span className='span'>{item.count >= 5 ? item.goal : item.weight}</span>
-                    
-                 {/* {  for (var i=0; i < item.times; i++) 
-                          React.createElement('div', { class: 'times' }, 'Chocolate')(i)
-                      
-                    } */}
-                   
-      
-                      { React.createElement('div', { className: 'times' }, 'Chocolate') }
-      
-                    <span className='span'>{item.times}</span>
-                    <span className='span'>{item.rutine}</span>
-                    <span className='span'>{item.six}</span>
-                    <span className='span'>{item.final}</span>
+                    <div className='topCalc'>
+                        <span className='span'>{item.count} WEEK OF 9</span>
+                        <span className='span'>WEIGHT OF THE WEEK :{item.count >= 5 ? item.goal : item.weight} KG</span>
+                        <span className='span'>GOAL :{item.final}</span>
+                    </div>
+                    <div>
+                      <h3>Hard Training :</h3> <span className='weight'> WEIGHT {item.count >= 5 ? item.goal : item.weight} KG</span>
+                        <View view={item.times} times={item.rutine} />
+                    </div>
+                    <div>
+                      <h3>Recovery Training :  </h3> <span className='weight'>WEIGHT {item.first} KG</span> <View view={item.six} times={item.rec} />
+                    </div>
                 </div>
             })
         }
@@ -224,35 +237,35 @@ class Calc extends React.Component {
     }
 
     render() {
-        
+
         const BENCH = this.getBenchPress();
         const DEADLIFT = this.getDeadlift();
         const SQUAT = this.getSquat();
-        if(this.props.bench){
+        if (this.props.bench) {
             return (
                 <div className='row'>
-                            { BENCH } 
+                    {BENCH}
                 </div>
             );
         }
-        if(this.props.dead){
+        if (this.props.dead) {
             return (
                 <div className='row'>
-                            { DEADLIFT } 
+                    {DEADLIFT}
                 </div>
             );
         }
-        if(this.props.squat){
+        if (this.props.squat) {
             return (
                 <div className='row'>
-                            { SQUAT } 
+                    {SQUAT}
                 </div>
             );
         }
-        return(
+        return (
             <div></div>
         );
-     
+
     }
 }
 

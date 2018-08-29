@@ -3,9 +3,16 @@ body{
 }
 #root{
 background-color: #333334;
-color:lightseagreen;
+color:lightskyblue;
 margin:10%;
 padding:5%;
+font-family:Arial;
+}
+
+#squat ,#dead ,#bench{
+    border:1px solid orange;
+    padding:10px;
+    border-radius:5px 5px 5px 5px;
 }
 
 a {
@@ -25,6 +32,12 @@ a:hover{
     border-radius:4px 4px 4px 4px;
 }
 
+.selected{
+    border-radius:4px 4px 4px 4px;
+    border:1px solid lightskyblue;
+    background-color: lightskyblue;
+    color:white;
+}
 h1 , h3{
     color:orange;
 }
@@ -56,8 +69,8 @@ button:hover{
 }
 
 .row {
-padding:10px;
-border:1px solid lightseagreen;
+/* padding:10px; */
+/* border:1px solid lightseagreen; */
 margin:20px 0;
 }
 
@@ -65,4 +78,46 @@ margin:20px 0;
     margin-right:10px;
     font-size: 16px;
     padding:0 20px;
+}
+.topCalc{
+    margin:20px 0;
+    background-color: lightskyblue;
+    padding:10px;
+    color:white;
+    font-size:20px ;
+    border-radius:5px 5px 5px 5px;
+}
+.viewBox{
+    display: inline-block;
+    margin:20px 0;
+    float:right;
+}
+h3{
+    display: inline-block;
+    width:250px;
+}
+.weight{
+    color:lightskyblue;
+}
+.check{
+    border:1px solid lightskyblue;
+    border-radius:5px 5px 5px 5px;
+    padding:10px 50px;
+    margin:5px;
+    color:lightskyblue;
+}
+
+.check:hover{
+    cursor: pointer;
+    background-color:lightskyblue;
+    color:white;
+}
+
+.checked{
+    border:1px solid white;
+    border-radius:5px 5px 5px 5px;
+    padding:10px 50px;
+    margin:5px;
+    background-color:red;
+    color:white;
 }
