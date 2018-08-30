@@ -35,15 +35,16 @@ class BenchPress extends React.Component {
     render() {
         return (
             <div className='row'>
-                <h2>Bench Press</h2>
-                <input type="number" onChange={this.getBPress} />
+                <h2>BENCH PRESS</h2>
+                
+                <input type="number" name='bp' onChange={this.getBPress} />
                 <Calc
                     benchCalc={this.state.benchPress}
                     isReady={this.state.isReady}
                     bench={'bench'}
                     isCleanBench={this.state.isClean} />
-                <button onClick={this.calcReady.bind(this)}>Calculate</button>
-                <button onClick={this.cleanStorage.bind(this)}>Clear</button>
+                <button className='bottomb' onClick={this.calcReady.bind(this)}>CALCULATE</button>
+                <button className='red bottomb' onClick={this.cleanStorage.bind(this)}>CLEAR</button>
             </div>
         );
     }

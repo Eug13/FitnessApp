@@ -1,5 +1,7 @@
 import React from 'react';
-import View from './View'
+import ViewBench from './ViewBench';
+import ViewDead from './ViewDead';
+import ViewSquat from './ViewSquat';
 
 class Calc extends React.Component {
     constructor(props) {
@@ -10,7 +12,10 @@ class Calc extends React.Component {
         this.state = {
             bench: [],
             dead: [],
-            squat: []
+            squat: [],
+            ms:'',
+            md:'',
+            mb:''
         }
     }
 
@@ -155,31 +160,72 @@ class Calc extends React.Component {
         console.log('isReady!!!!!!!!')
     }
 
+    markBench(){
+        this.setState({
+      mb:'mb'
+  })
+      }
+  
+      delBench(){
+          let bench = [...this.state.bench];
+          bench.shift();
+          this.setState({
+              bench:bench
+          })
+      }
+
+    markDead(){
+        this.setState({
+      md:'md'
+  })
+      }
+  
+      delDead(){
+          let dead = [...this.state.dead];
+          dead.shift();
+          this.setState({
+              dead:dead
+          })
+      }
+
+    markSquat(){
+      this.setState({
+    ms:'ms'
+})
+    }
+
+    delSquat(){
+        let squat = [...this.state.squat];
+        squat.shift();
+        this.setState({
+            squat:squat
+        })
+    }
 
     getBenchPress() {
         if (this.state.bench.length !== 0) { localStorage.setItem('dataBench', JSON.stringify(this.state.bench)); }
-        let bench = this.state.bench;
+        let item = this.state.bench[0];
         let hard = 'hard';
-        let recovery = 'recovery';
+        // let recovery = 'recovery';
 
-        if (bench) {
-            return bench.map((item , index) => {
-                return <div key={index} id='bench' className='row' >
-                <div className='topCalc'>
+        if (item) {
+            // return bench.map((item , index) => {
+                return <div  id='bench' className='row' >
+                <div className={this.state.mb === '' ? 'topCalc' : 'topCalc mb'}>
                     <span className='span'>{item.count} WEEK OF 9</span>
                     <span className='span'>WEIGHT OF THE WEEK :{item.count >= 5 ? item.goal : item.weight} KG</span>
                     <span className='span'>GOAL :{item.final}</span>
                 </div>
                 <div>
                   <h3>Hard Training :</h3> <span className='weight'> WEIGHT {item.count >= 5 ? item.goal : item.weight} KG</span>
-                    <View view={item.times} times={item.rutine} hard={hard} key={index}/>
+                    <ViewBench view={item.times} times={item.rutine} hard={hard} />
                 </div>
                 <div>
                   <h3>Recovery Training :  </h3> <span className='weight'>WEIGHT {item.first} KG</span> 
-                  <View view={item.six} times={item.rec} recovery={recovery}/>
+                  <ViewBench view={item.six} times={item.rec} del={this.delBench.bind(this)} mark={this.markBench.bind(this)}/>
                 </div>
             </div>
-            })
+            // })
         }
         return []
     }
@@ -187,24 +233,26 @@ class Calc extends React.Component {
     getDeadlift() {
 
         if (this.state.dead.length !== 0) { localStorage.setItem('dataDead', JSON.stringify(this.state.dead)); }
-        let dead = this.state.dead;
-        if (dead) {
-            return dead.map((item, index) => {
-                return <div key={index} id='dead' className='row' >
-                <div className='topCalc'>
+        let item = this.state.dead[0];
+        let hard = 'hard';
+        if (item) {
+            // return dead.map((item, index) => {
+                return <div  id='dead' className='row' >
+                <div className={this.state.md === '' ? 'topCalc' : 'topCalc md'}>
                     <span className='span'>{item.count} WEEK OF 9</span>
                     <span className='span'>WEIGHT OF THE WEEK :{item.count >= 5 ? item.goal : item.weight} KG</span>
                     <span className='span'>GOAL :{item.final}</span>
                 </div>
                 <div>
                   <h3>Hard Training :</h3> <span className='weight'> WEIGHT {item.count >= 5 ? item.goal : item.weight} KG</span>
-                    <View view={item.times} times={item.rutine} />
+                    <ViewDead view={item.times} times={item.rutine} hard={hard}/>
                 </div>
                 <div>
-                  <h3>Recovery Training :  </h3> <span className='weight'>WEIGHT {item.first} KG</span> <View view={item.six} times={item.rec} />
+                  <h3>Recovery Training :  </h3> <span className='weight'>WEIGHT {item.first} KG</span> 
+                  <ViewDead view={item.six} times={item.rec} del={this.delDead.bind(this)} mark={this.markDead.bind(this)}/>
                 </div>
             </div>
-            })
+            // })
         }
 
         return []
@@ -212,26 +260,28 @@ class Calc extends React.Component {
 
     getSquat() {
         if (this.state.squat.length !== 0) { localStorage.setItem('dataSquat', JSON.stringify(this.state.squat)); }
-        let squat = this.state.squat;
-        
+        let item = this.state.squat[0];
+        let hard = 'hard';
+        // let recovery = 'recovery';
 
-        if (squat) {
-            return squat.map((item, index) => {
-                return <div key={index} id='squat' className='row' >
-                    <div className='topCalc'>
+        if (item) {
+            // return squat.map(item => {
+                return <div  className='row' >
+                    <div className={this.state.ms === '' ? 'topCalc' : 'topCalc ms'}>
                         <span className='span'>{item.count} WEEK OF 9</span>
                         <span className='span'>WEIGHT OF THE WEEK :{item.count >= 5 ? item.goal : item.weight} KG</span>
                         <span className='span'>GOAL :{item.final}</span>
                     </div>
                     <div>
                       <h3>Hard Training :</h3> <span className='weight'> WEIGHT {item.count >= 5 ? item.goal : item.weight} KG</span>
-                        <View view={item.times} times={item.rutine} />
+                        <ViewSquat view={item.times} times={item.rutine}   hard={hard}/>
                     </div>
                     <div>
-                      <h3>Recovery Training :  </h3> <span className='weight'>WEIGHT {item.first} KG</span> <View view={item.six} times={item.rec} />
+                      <h3>Recovery Training :  </h3> <span className='weight'>WEIGHT {item.first} KG</span> 
+                      <ViewSquat view={item.six} times={item.rec} del={this.delSquat.bind(this)} mark={this.markSquat.bind(this)}/>
                     </div>
                 </div>
-            })
+            // })
         }
         return []
     }

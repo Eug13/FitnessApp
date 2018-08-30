@@ -35,15 +35,15 @@ class Deadlift extends React.Component {
 
         return (
             <div className='row'>
-                <h2>DeadLift</h2>
+                <h2>DEADLIFT</h2>
                 <input type="number" onChange={this.getDeadlift} />
                 <Calc 
                 deadCalc={this.state.deadlift} 
                 isReady={this.state.isReady} 
                 dead={'dead'}
                 isCleanDead={this.state.isClean} />
-                <button onClick={this.calcReady.bind(this)}>Calculate</button>
-                <button onClick={this.cleanStorage.bind(this)}>Clear</button>
+               <button className='bottomb' onClick={this.calcReady.bind(this)}>CALCULATE</button>
+                <button className='red bottomb' onClick={this.cleanStorage.bind(this)}>CLEAR</button>
             </div>
         );
     }

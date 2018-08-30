@@ -27,15 +27,17 @@ class Squat extends React.Component {
 
     cleanStorage() {
         localStorage.setItem('dataSquat', JSON.stringify(''));
+        localStorage.setItem('squatDone', JSON.stringify(''));
         this.setState({
             isClean: true
         })
+        window.location.reload();
     }
     render() {
 
         return (
             <div className='row'>
-                <h2>Squat</h2>
+                <h2>SQUAT</h2>
                 <input type="number" onChange={this.getSquat} />
                 <Calc 
                 squatCalc={this.state.squat} 
@@ -43,8 +45,8 @@ class Squat extends React.Component {
                 squat={'squat'} 
                 isCleanSquat={this.state.isClean}
                 />
-                <button onClick={this.calcReady.bind(this)}>Calculate</button>
-                <button onClick={this.cleanStorage.bind(this)}>Clear</button>
+                <button className='bottomb' onClick={this.calcReady.bind(this)}>CALCULATE</button>
+                <button className='red bottomb' onClick={this.cleanStorage.bind(this)}>CLEAR</button>
             </div>
         );
     }
