@@ -10,7 +10,8 @@ class ViewBench extends React.Component {
         this.state = {
             counter: 0,
             bench: '',
-            weekend: ''
+            weekend: '',
+            message:''
         }
     }
 
@@ -31,7 +32,26 @@ class ViewBench extends React.Component {
 
     isCheckedHandler(e) {
         const view = this.props.view;
-        // const hard = this.props.hard;
+        const final = this.props.final;
+        if (view === 6 && final === 9) {
+            this.setState({
+                counter: this.state.counter + 1
+            })
+            e.target.setAttribute('class', 'checked')
+            if (this.state.counter === 5) {
+                this.setState({
+                    message: 'Congratulations your POWER is increased !'
+                })
+                setTimeout(()=>{
+                    localStorage.setItem('dataBench', JSON.stringify(''));
+                    localStorage.setItem('benchDone', JSON.stringify(''));
+                    window.location.reload();
+                }  
+               ,3000)
+            }
+        }
+
+
         if (view === 6) {
             this.setState({
                 counter: this.state.counter + 1
@@ -140,17 +160,16 @@ class ViewBench extends React.Component {
                 )
             }
             return (
-             
                     <div className='viewBox'>
-                        <span className={this.state.weekend === 'done' ? 'done' : 'check'} onClick={this.isCheckedHandler}>{times}</span>
-                        <span className="check" onClick={this.isCheckedHandler}>{times}</span>
-                        <span className="check" onClick={this.isCheckedHandler}>{times}</span>
-                        <span className="check" onClick={this.isCheckedHandler}>{times}</span>
-                        <span className="check" onClick={this.isCheckedHandler}>{times}</span>
-                        <span className="check" id="last" onClick={this.isCheckedHandler}>{times}</span>
-                        <button className='red' style={this.state.weekend === 'done'?{display:'inline-block'}:{display: 'none'}}
-                        onClick={this.isDelete}>DONE</button>
-                    </div>
+                        <span className={this.state.message !== '' ? 'done' : 'check'} onClick={this.isCheckedHandler}>{times}</span>
+                        <span className={this.state.message !== '' ? 'done' : 'check'} onClick={this.isCheckedHandler}>{times}</span>
+                        <span className={this.state.message !== '' ? 'done' : 'check'} onClick={this.isCheckedHandler}>{times}</span>
+                        <span className={this.state.message !== '' ? 'done' : 'check'} onClick={this.isCheckedHandler}>{times}</span>
+                        <span className={this.state.message !== '' ? 'done' : 'check'} onClick={this.isCheckedHandler}>{times}</span>
+                        <span className={this.state.message !== '' ? 'checked' : 'check'} id="last" onClick={this.isCheckedHandler}>{this.state.message !== '' ? this.state.message : times}</span>
+                        <span className={this.state.message !== '' ? 'done':'checked red'} style={this.state.weekend === 'done'?{display:'inline'}:{display: 'none'}}
+                        onClick={this.isDelete}>{this.state.message !==''?'':'DONE'}</span>
+                        </div>       
             )
         }
         if (view === 5) {

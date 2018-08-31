@@ -27,9 +27,11 @@ class BenchPress extends React.Component {
 
     cleanStorage() {
         localStorage.setItem('dataBench', JSON.stringify(''));
+        localStorage.setItem('benchDone', JSON.stringify(''));
         this.setState({
             isClean: true
         })
+        window.location.reload();
     }
 
     render() {

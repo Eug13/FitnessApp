@@ -222,7 +222,7 @@ class Calc extends React.Component {
                 </div>
                 <div>
                   <h3>Recovery Training :  </h3> <span className='weight'>WEIGHT {item.first} KG</span> 
-                  <ViewBench view={item.six} times={item.rec} del={this.delBench.bind(this)} mark={this.markBench.bind(this)}/>
+                  <ViewBench view={item.six} times={item.rec} del={this.delBench.bind(this)} mark={this.markBench.bind(this)} final={item.count}/>
                 </div>
             </div>
             // })

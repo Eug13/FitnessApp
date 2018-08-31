@@ -92,6 +92,7 @@ button:hover{
     border:1px solid white;   
     color:white;
     background-color: red;
+    cursor: pointer;
 }
 .row {
 /* padding:10px; */

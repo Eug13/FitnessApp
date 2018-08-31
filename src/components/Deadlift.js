@@ -27,9 +27,11 @@ class Deadlift extends React.Component {
 
     cleanStorage() {
         localStorage.setItem('dataDead', JSON.stringify(''));
+        localStorage.setItem('deadDone', JSON.stringify(''));
         this.setState({
             isClean: true
         })
+        window.location.reload();
     }
     render() {
 
