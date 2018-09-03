@@ -10,7 +10,7 @@ class App extends React.Component{
     render(){
         return(
         <Router>
-        <div>
+        <div className="menu">
            <NavLink to="/" >
              Home
             </NavLink>

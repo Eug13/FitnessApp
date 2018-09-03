@@ -9,7 +9,18 @@ class Squat extends React.Component {
         this.state = {
             squat: '',
             isReady: false,
-            isClean: false
+            isClean: false,
+            done:''
+        }
+    }
+
+
+    componentDidMount(){
+        if (localStorage.getItem('hideInputSquat')) {
+            let done = JSON.parse(localStorage.getItem('hideInputSquat'));
+            this.setState({
+                done: done
+            })
         }
     }
 
@@ -21,13 +32,16 @@ class Squat extends React.Component {
 
     calcReady() {
         this.setState({
-            isReady: true
+            isReady: true,
+            done:'done'
         })
+        localStorage.setItem('hideInputSquat', JSON.stringify('done'));
     }
 
     cleanStorage() {
         localStorage.setItem('dataSquat', JSON.stringify(''));
         localStorage.setItem('squatDone', JSON.stringify(''));
+        localStorage.setItem('hideInputSquat', JSON.stringify(''));
         this.setState({
             isClean: true
         })
@@ -38,14 +52,14 @@ class Squat extends React.Component {
         return (
             <div className='row'>
                 <h2>SQUAT</h2>
-                <input type="number" onChange={this.getSquat} />
+                <input type="number" onChange={this.getSquat}   className={this.state.done}/>
                 <Calc 
                 squatCalc={this.state.squat} 
                 isReady={this.state.isReady} 
                 squat={'squat'} 
                 isCleanSquat={this.state.isClean}
                 />
-                <button className='bottomb' onClick={this.calcReady.bind(this)}>CALCULATE</button>
+                <button className={this.state.done==='done'? 'done' :'bottomb'} onClick={this.calcReady.bind(this)}>CALCULATE</button>
                 <button className='red bottomb' onClick={this.cleanStorage.bind(this)}>CLEAR</button>
             </div>
         );

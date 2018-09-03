@@ -213,8 +213,8 @@ class Calc extends React.Component {
                 return <div  id='bench' className='row' >
                 <div className={this.state.mb === '' ? 'topCalc' : 'topCalc mb'}>
                     <span className='span'>{item.count} WEEK OF 9</span>
-                    <span className='span'>WEIGHT OF THE WEEK :{item.count >= 5 ? item.goal : item.weight} KG</span>
-                    <span className='span'>GOAL :{item.final}</span>
+                    <span className='span'>GOAL : {item.final}</span>
+                    <span className='span'>WORKING WEIGHT : {item.count >= 5 ? item.goal : item.weight} KG</span>
                 </div>
                 <div>
                   <h3>Hard Training :</h3> <span className='weight'> WEIGHT {item.count >= 5 ? item.goal : item.weight} KG</span>
@@ -249,7 +249,8 @@ class Calc extends React.Component {
                 </div>
                 <div>
                   <h3>Recovery Training :  </h3> <span className='weight'>WEIGHT {item.first} KG</span> 
-                  <ViewDead view={item.six} times={item.rec} del={this.delDead.bind(this)} mark={this.markDead.bind(this)}/>
+                  <ViewDead view={item.six} times={item.rec} del={this.delDead.bind(this)} mark={this.markDead.bind(this)}
+                  final={item.count}/>
                 </div>
             </div>
             // })
@@ -278,7 +279,8 @@ class Calc extends React.Component {
                     </div>
                     <div>
                       <h3>Recovery Training :  </h3> <span className='weight'>WEIGHT {item.first} KG</span> 
-                      <ViewSquat view={item.six} times={item.rec} del={this.delSquat.bind(this)} mark={this.markSquat.bind(this)}/>
+                      <ViewSquat view={item.six} times={item.rec} del={this.delSquat.bind(this)} mark={this.markSquat.bind(this)}
+                      final={item.count}/>
                     </div>
                 </div>
             // })

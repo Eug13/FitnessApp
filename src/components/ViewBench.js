@@ -45,6 +45,7 @@ class ViewBench extends React.Component {
                 setTimeout(()=>{
                     localStorage.setItem('dataBench', JSON.stringify(''));
                     localStorage.setItem('benchDone', JSON.stringify(''));
+                    localStorage.setItem('hideInputBench', JSON.stringify(''));
                     window.location.reload();
                 }  
                ,3000)
@@ -167,7 +168,7 @@ class ViewBench extends React.Component {
                         <span className={this.state.message !== '' ? 'done' : 'check'} onClick={this.isCheckedHandler}>{times}</span>
                         <span className={this.state.message !== '' ? 'done' : 'check'} onClick={this.isCheckedHandler}>{times}</span>
                         <span className={this.state.message !== '' ? 'checked' : 'check'} id="last" onClick={this.isCheckedHandler}>{this.state.message !== '' ? this.state.message : times}</span>
-                        <span className={this.state.message !== '' ? 'done':'checked red'} style={this.state.weekend === 'done'?{display:'inline'}:{display: 'none'}}
+                        <span className={this.state.message !== '' ? 'done':'checked red btn'} style={this.state.weekend === 'done'?{display:'inline'}:{display: 'none'}}
                         onClick={this.isDelete}>{this.state.message !==''?'':'DONE'}</span>
                         </div>       
             )
@@ -217,9 +218,6 @@ class ViewBench extends React.Component {
                 </div>
             )
         }
-
-
-
 
         else {
             return (

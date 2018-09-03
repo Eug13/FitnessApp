@@ -9,7 +9,17 @@ class Deadlift extends React.Component {
         this.state = {
             deadlift: '',
             isReady: false,
-            isClean: false
+            isClean: false,
+            done:''
+        }
+    }
+
+    componentDidMount(){
+        if (localStorage.getItem('hideInputDead')) {
+            let done = JSON.parse(localStorage.getItem('hideInputDead'));
+            this.setState({
+                done: done
+            })
         }
     }
 
@@ -21,13 +31,16 @@ class Deadlift extends React.Component {
 
     calcReady() {
         this.setState({
-            isReady: true
+            isReady: true,
+            done:'done'
         })
+        localStorage.setItem('hideInputDead', JSON.stringify('done'));
     }
 
     cleanStorage() {
         localStorage.setItem('dataDead', JSON.stringify(''));
         localStorage.setItem('deadDone', JSON.stringify(''));
+        localStorage.setItem('hideInputDead', JSON.stringify(''));
         this.setState({
             isClean: true
         })
@@ -38,13 +51,13 @@ class Deadlift extends React.Component {
         return (
             <div className='row'>
                 <h2>DEADLIFT</h2>
-                <input type="number" onChange={this.getDeadlift} />
+                <input type="number" onChange={this.getDeadlift} className={this.state.done} />
                 <Calc 
                 deadCalc={this.state.deadlift} 
                 isReady={this.state.isReady} 
                 dead={'dead'}
                 isCleanDead={this.state.isClean} />
-               <button className='bottomb' onClick={this.calcReady.bind(this)}>CALCULATE</button>
+               <button className={this.state.done==='done'? 'done' :'bottomb'} onClick={this.calcReady.bind(this)}>CALCULATE</button>
                 <button className='red bottomb' onClick={this.cleanStorage.bind(this)}>CLEAR</button>
             </div>
         );
